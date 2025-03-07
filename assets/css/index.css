@@ -1,0 +1,402 @@
+/* Style général du body */
+body {
+    background-image: url('../img/187210.jpg');
+    background-color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Conteneur principal du Pokedex */
+.pokedex {
+    display: flex;
+    flex-direction: row;
+    width: 1000px; /* Augmentée pour plus d'espace */
+    height: 800px; /* Augmentée pour plus d'espace */
+    border-radius: 20%; /* Arrondir les coins du Pokedex */
+}
+
+/* Panneaux gauche et droit */
+.left-panel, .right-panel {
+    background-color: #ff2f2f;
+    flex: 1;
+    padding: 10px;
+    position: relative;
+
+}
+
+.left-panel .top {
+    position: relative;
+    top: 24px;
+    height: 50px;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+/* Charnière */
+.middle-part {
+    background-color: #ff2f2f;
+    padding: 10px;
+    width:20px;
+    position: relative;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-radius: 0% 20% 20% 0% / 0% 1% 1% 0%;
+    margin-right: 2px;
+}
+
+.middle-part .first {
+    height: 76px;
+    border-right: 2px solid black;
+    margin-left: -11px;
+    width: 40px;
+    margin-top: -6px;
+}
+
+/* partie de la charnière */
+.middle-part .second {
+    position: relative;
+    height: 100px;
+    border-top: 3px solid black;
+    border-right: 2px solid black;
+    left: -10px;
+    width: 38px;
+}
+.middle-part .third {
+    background-color: #ff2f2f;
+    position: relative;
+    height: 500px;
+    border: 3px solid black;
+    left: -10px;
+    width: 50px;
+}
+
+.middle-part .fourth {
+    position: relative;
+    height: 102px;
+    border-right: 2px solid black;
+    left: -10px;
+    width: 38px;
+}
+
+/* Panneaux gauche */
+.left-panel {
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    border-radius: 2% 0% 0% 2% / 1% 0% 0% 1%;
+}
+
+/* Panneaux droit */
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 610px;
+    top: 166px;
+    border: 2px solid black;
+    border-radius: 0% 2% 2% 0% / 0% 1% 1% 0%;
+}
+
+/* Cercle et titre à gauche */
+.circle {
+    width: 50px;
+    height: 50px;
+    background-color: #00FFFF;
+    border: 2px solid black;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* logo */
+.circle img {
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    position: absolute;
+    top: 5%; /* Ajuste cette valeur pour changer l'espace depuis le haut */
+    left: 50%;
+    transform: translateX(-50%); /* Centre horizontalement le texte */
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: black; /* Assure-toi que la couleur soit visible */
+}
+
+.hint {
+    position: absolute;
+    top: 10px;
+    right: 7px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none !important; /* Supprime toute bordure */
+    outline: none !important; /* Supprime le contour de focus */
+    border-radius: 50%; /* Assure un cercle parfait */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus et active pour supprimer toutes bordures ou effets par défaut */
+.hint:focus,
+.hint:active {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Désactivation des bordures internes pour Firefox */
+.hint::-moz-focus-inner {
+    border: none !important;
+    padding: 0;
+}
+
+/* Style pour la modale */
+.modal {
+    display: none;  /* La modale est cachée par défaut */
+    position: fixed;
+    z-index: 1; /* S'assure que la modale est au-dessus des autres éléments */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Couleur de fond avec transparence */
+    overflow: auto; /* Permet de faire défiler le contenu si nécessaire */
+}
+
+/* Contenu de la modale */
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto; /* Centrer la modale verticalement et horizontalement */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* 80% de la largeur de l'écran, tu peux l'ajuster à ta convenance */
+    max-width: 900px; /* Limite la largeur à 900px pour éviter une trop grande expansion */
+    max-height: 80%; /* Limite la hauteur pour que la modale ne prenne pas toute la hauteur de l'écran */
+    overflow-y: auto; /* Permet un défilement vertical si le contenu dépasse la taille */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Le bouton de fermeture */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Affichage principal */
+.main-display {
+    background-color: white;
+    height: 50%;
+    padding: 20px;
+    text-align: center;
+    margin: 80px 15px 15px;
+    border-radius:10px;
+    border: 25px solid rgb(202, 202, 202);
+    border-bottom:50px solid rgb(202, 202, 202);
+}
+
+/* Affichage secondaire */
+.secondary-display {
+    background-color: white;
+    border: 2px solid black;
+    height: 50%;
+    margin: 20px 15px ;
+    padding: 10px;
+    text-align: center;
+}
+
+.search-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.search-buttons button {
+    background-color: #28aafe;
+    border: 1px solid black;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#search-id {
+    border-bottom-left-radius: 10px;
+}
+
+#search-id:hover {
+    background-color: #1c6ea5; /* Change la couleur au survol pour correspondre aux autres boutons */
+}
+
+#search-height {
+    border-bottom-right-radius: 10px;
+}
+
+#search-height:hover {
+    background-color: #1c6ea5; /* Change la couleur au survol pour correspondre aux autres boutons */
+}
+
+#search-global {
+    justify-content: center;
+    display: flex; /* Assure que "Recherche Global" occupe une ligne entière */
+    background-color: #28aafe; /* Conserve la couleur de fond */
+    width: 78.3%;
+    border-top-left-radius: 10px; /* Arrondit le coin supérieur gauche */
+    border-top-right-radius: 10px; /* Arrondit le coin supérieur droit */
+}
+
+#search-global:hover {
+    background-color: #1c6ea5; /* Change la couleur au survol pour correspondre aux autres boutons */
+}
+
+#search-name:hover {
+    background-color: #1c6ea5; /* Change la couleur au survol pour correspondre aux autres boutons */
+}
+
+#search-type:hover {
+    background-color: #1c6ea5; /* Change la couleur au survol pour correspondre aux autres boutons */
+}
+
+#search-weight:hover {
+    background-color: #1c6ea5; /* Change la couleur au survol pour correspondre aux autres boutons */
+}
+
+/* Formulaire de recherche */
+.search-form {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+}
+
+.search-form input[type="text"] {
+    flex: 3;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ff0000;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    width: 100%; /* Assurez-vous que la largeur soit ajustée pour éviter les débordements */
+    margin: 10px;
+}
+
+.search-form input[type="text"]:focus {
+    border-color: #00FFFF;
+}
+
+/* Liste des suggestions */
+.suggestions-list {
+    border: 0px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    background: white;
+    position: absolute;
+    width: calc(100% - 10px);
+    left: 0;
+    top: 100%; /* Positionner la liste juste sous la barre de saisie */
+    z-index: 1000;
+    border-radius: 5px;
+}
+
+.suggestions-list div {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+/* Survol des éléments de la liste */
+.suggestions-list div:hover {
+    background-color: #f0f0f0;
+}
+
+.suggestions-list div.selected {
+    background-color: #dcdcdc; /* Fond gris clair pour l'élément sélectionné */
+}
+
+/* Image des suggestions */
+.suggestions-list img {
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.suggestion-item.selected {
+    background-color: #f0f0f0; /* Exemple de surbrillance de l'élément sélectionné */
+}
+
+.sprite-buttons {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.sprite-buttons .btn-normal,
+.sprite-buttons .btn-shiny {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 5px;
+    background-color: #4CAF50; /* Couleur pour normal */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Animation pour un effet fluide */
+}
+
+.sprite-buttons .btn-shiny {
+    background-color: #4CAF50; /* Couleur pour shiny */
+}
+
+/* Effet hover pour Normal */
+.sprite-buttons .btn-normal:hover {
+    background-color: #388E3C; /* Teinte plus foncée pour normal */
+    transform: scale(1.05); /* Légèrement plus grand au hover */
+}
+
+/* Effet hover pour Shiny */
+.sprite-buttons .btn-shiny:hover {
+    background-color: #388E3C; /* Teinte plus foncée pour shiny */
+    transform: scale(1.05); /* Légèrement plus grand au hover */
+}
+
+/* Facultatif : Ajout d'un effet de focus pour l'accessibilité */
+.sprite-buttons .btn-normal:focus,
+.sprite-buttons .btn-shiny:focus {
+    outline: 2px solid #ffffff; /* Bordure blanche sur le focus */
+    outline-offset: 2px;
+}
